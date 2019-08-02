@@ -1,10 +1,19 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { login } from '../reducers/authReducer'
 
-const LoginForm = ({ handleLogin, username, password }) => {
+const LoginForm = (props) => {
 
-  username = { ...username, reset: null }
-  password = { ...password, reset: null }
+  const handleLogin = async (event) => {
+    event.preventDefault()
+    const credentials = {
+      username: event.target.username.value,
+      password: event.target.password.value
+    }
+    event.target.username.value = ''
+    event.target.password.value = ''
+    props.login(credentials)
+  }
 
   return (
     <div>
@@ -13,11 +22,11 @@ const LoginForm = ({ handleLogin, username, password }) => {
       <form onSubmit={handleLogin}>
         <div>
           username
-          <input {...username} />
+          <input name='username' />
         </div>
         <div>
           password
-          <input {...password} />
+          <input type='password' name='password' />
         </div>
         <button type="submit">login</button>
       </form>
@@ -25,18 +34,11 @@ const LoginForm = ({ handleLogin, username, password }) => {
   )
 }
 
-LoginForm.propTypes = {
-  handleLogin: PropTypes.func.isRequired,
-  username: PropTypes.shape({
-    value: PropTypes.string.isRequired,
-    type: PropTypes.string,
-    onChange: PropTypes.func.isRequired
-  }),
-  password: PropTypes.shape({
-    value: PropTypes.string.isRequired,
-    type: PropTypes.string,
-    onChange: PropTypes.func.isRequired
-  })
+const mapDispatchToProps = {
+  login,
 }
 
-export default LoginForm
+export default connect(
+  null,
+  mapDispatchToProps
+)(LoginForm)

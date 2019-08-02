@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 const Blog = ({ blog, addLike, delBlog, currentUsername }) => {
@@ -41,4 +42,6 @@ Blog.propTypes = {
   currentUsername: PropTypes.string.isRequired
 }
 
-export default Blog
+export default connect(
+  null,
+) (Blog)

@@ -1,28 +1,43 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { createBlog } from '../reducers/blogReducer'
+import { setNotification } from '../reducers/notificationReducer'
 
-const BlogForm = ( { addBlog, title, author, url }) => {
+const BlogForm = (props) => {
 
-  title = { ...title, reset: null }
-  author = { ...author, reset: null }
-  url = { ...url, reset: null }
+  const addBlog = async (event) => {
+    event.preventDefault()
+    const newBlog = {
+      title: event.target.title.value,
+      author: event.target.author.value,
+      url: event.target.url.value
+    }
+    event.target.title.value = ''
+    event.target.author.value = ''
+    event.target.url.value = ''
+
+    props.createBlog(newBlog)
+    props.setNotification({
+      message: `a new blog ${newBlog.title} by ${newBlog.author} added`,
+      type: 'success'
+    }, 5)
+  }
 
   return (
     <div>
       <h2>create new</h2>
-
       <form onSubmit={addBlog}>
         <div>
           title:
-          <input {...title} />
+          <input name='title' />
         </div>
         <div>
           author:
-          <input {...author} />
+          <input name='author' />
         </div>
         <div>
           url:
-          <input {...url} />
+          <input name='url' />
         </div>
         <div>
           <button type="submit">create</button>
@@ -32,8 +47,12 @@ const BlogForm = ( { addBlog, title, author, url }) => {
   )
 }
 
-BlogForm.propTypes = {
-  addBlog: PropTypes.func.isRequired,
+const mapDispatchToProps = {
+  createBlog,
+  setNotification
 }
 
-export default BlogForm
+export default connect(
+  null,
+  mapDispatchToProps
+)(BlogForm)

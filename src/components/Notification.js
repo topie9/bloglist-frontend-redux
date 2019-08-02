@@ -1,29 +1,39 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const Notification = ({ message, type }) => {
-  if (message === null) {
-    return null
+const Notification = (props) => {
+  const { message, type } = props.notification
+  const style = {
+    background: 'lightgrey',
+    fontSize: 20,
+    borderStyle: 'solid',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
   }
 
-  let className = 'notification'
   if (type === 'error') {
-    className += ' error-notification'
+    style.color = 'red'
+  } else if (type === 'success') {
+    style.color = 'green'
   }
-  if (type === 'success') {
-    className += ' success-notification'
-  }
+
+  if (message === '')
+    return <div></div>
 
   return (
-    <div className={className}>
+    <div style={style}>
       {message}
     </div>
   )
 }
 
-Notification.propTypes = {
-  message: PropTypes.string,
-  type: PropTypes.string
+const mapStateToProps = (state) => {
+  return {
+    notification: state.notification
+  }
 }
 
-export default Notification
+export default connect(
+  mapStateToProps,
+)(Notification)
