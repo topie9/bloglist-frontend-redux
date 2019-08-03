@@ -2,12 +2,9 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router,
   Route, } from 'react-router-dom'
-import BlogList from './components/BlogList'
-import BlogForm from './components/BlogForm'
-import UserList from './components/UserList'
-import LoginForm from './components/LoginForm'
-import Notification from './components/Notification'
-import Togglable from './components/Togglable'
+import { Blog, BlogList, BlogForm,
+  User, UserList, LoginForm, Notification,
+  Togglable  } from './components'
 import { initializeBlogs } from './reducers/blogReducer'
 import { initializeUsers } from './reducers/userReducer'
 import { initializeUser, logout } from './reducers/authReducer'
@@ -56,6 +53,12 @@ const App = (props) => {
             </div>
           } />
           <Route exact path='/users' render={() => <UserList />} />
+          <Route exact path='/users/:id' render={({ match }) =>
+            <User user={props.users.find(u => u.id === match.params.id)} />
+          } />
+          <Route exact path='/blogs/:id' render={({ match }) =>
+            <Blog blog={props.blogs.find(b => b.id === match.params.id)} />
+          } />
         </div>
       </Router>
     </div>
@@ -64,6 +67,8 @@ const App = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    blogs: state.blogs,
+    users: state.users,
     user: state.user
   }
 }

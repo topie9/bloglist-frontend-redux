@@ -8,8 +8,8 @@
 7.5 BlogForm and BlogList components using redux  
 7.6 Using redux for logged in user's data handling. LoginForm component using redux.  
 7.7 Using router to enable /users view  
-7.8  
-7.9  
+7.8 Using router to enable /users/:id single user view
+7.9 Using router to enable /blogs/:id single blog view  
 7.10  
 7.11  
 7.12  
@@ -21,3 +21,12 @@
 7.18  
 7.19  
 7.20  
+
+## Libraries/packages used:
+
+Axios  
+React  
+React-Redux  
+Redux Thunk  
+React Router  
+Eslint  

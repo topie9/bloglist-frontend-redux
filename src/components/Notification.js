@@ -10,6 +10,8 @@ const Notification = (props) => {
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
+    zIndex: 101,
+    position: 'absolute',
   }
 
   if (type === 'error') {

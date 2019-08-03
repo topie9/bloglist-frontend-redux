@@ -1,47 +1,44 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import { addLikeToBlog } from '../reducers/blogReducer'
+import { setNotification } from '../reducers/notificationReducer'
 
-const Blog = ({ blog, addLike, delBlog, currentUsername }) => {
-  const [dataVisible, setDataVisible] = useState(false)
-
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5
+const Blog = (props) => {
+  if (props.blog === undefined) {
+    return null
   }
-
-  const handleBlogVisibility = () => {
-    setDataVisible(!dataVisible)
+  const blog = props.blog
+  const addLike = (blog) => {
+    props.addLikeToBlog(blog)
+    props.setNotification({
+      message: 'liked the blog',
+      type: 'success'
+    }, 3)
   }
-  const showWhenVisible = { display: dataVisible ? '' : 'none' }
 
   return (
-    <div style={blogStyle} className='blog'>
-      <div className='clickableContent' onClick={handleBlogVisibility}>
-        {blog.title} {blog.author}
-      </div>
-      <div style={showWhenVisible} className='togglableContent'>
-        <a href={blog.url}>{blog.url}</a> <br />
-        {blog.likes} likes <button onClick={addLike}>like</button> <br />
-        added by {blog.user.name} <br />
-        {currentUsername === blog.user.username
-          && <button onClick={delBlog}>remove</button>
-        }
-      </div>
+    <div>
+      <h2>{blog.title} {blog.author}</h2>
+      <a href={blog.url}>{blog.url}</a> <br />
+      {blog.likes} likes
+      <button onClick={() => addLike(blog)}>like</button> <br />
+      added by {blog.user.name}
     </div>
   )
 }
 
-Blog.propTypes = {
-  blog: PropTypes.object.isRequired,
-  addLike: PropTypes.func.isRequired,
-  delBlog: PropTypes.func.isRequired,
-  currentUsername: PropTypes.string.isRequired
+const mapStateToProps = (state, ownProps) => {
+  return {
+    blog: ownProps.blog
+  }
+}
+
+const mapDispatchToProps = {
+  addLikeToBlog,
+  setNotification,
 }
 
 export default connect(
-  null,
+  mapStateToProps,
+  mapDispatchToProps
 ) (Blog)

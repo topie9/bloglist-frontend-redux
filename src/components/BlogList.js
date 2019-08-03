@@ -1,23 +1,25 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Blog from './Blog'
+import { Link } from 'react-router-dom'
 
 const BlogList = (props) => {
 
-  /*
-    <Blog key={blog.id} blog={blog}
-      addLike={() => addLikeOf(blog.id)}
-      delBlog={() => delBlogOf(blog.id, blog)}
-      currentUsername={props.user.username}
-    />
-  */
+  const listStyle = {
+    paddingTop: 10,
+    paddingLeft: 2,
+    border: 'solid',
+    borderWidth: 1,
+    marginBottom: 5
+  }
 
   return (
     <div>
       {props.blogs
         .sort((a, b) => b.likes - a.likes)
         .map(blog =>
-          <Blog key={blog.id} blog={blog} />
+          <div style={listStyle} key={blog.id}>
+            <Link to={`/blogs/${blog.id}`}>{blog.title} {blog.author}</Link>
+          </div>
         )
       }
     </div>
@@ -33,4 +35,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-)(BlogList)
+) (BlogList)
