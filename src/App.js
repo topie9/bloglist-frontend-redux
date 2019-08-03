@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { BrowserRouter as Router,
+  Route, } from 'react-router-dom'
 import BlogList from './components/BlogList'
-import BlogForm from './components/BlogForm.js'
-import LoginForm from './components/LoginForm.js'
-import Notification from './components/Notification.js'
-import Togglable from './components/Togglable.js'
+import BlogForm from './components/BlogForm'
+import UserList from './components/UserList'
+import LoginForm from './components/LoginForm'
+import Notification from './components/Notification'
+import Togglable from './components/Togglable'
 import { initializeBlogs } from './reducers/blogReducer'
+import { initializeUsers } from './reducers/userReducer'
 import { initializeUser, logout } from './reducers/authReducer'
 
 
@@ -17,31 +21,43 @@ const App = (props) => {
   }, []) // eslint-disable-line
 
   useEffect(() => {
+    props.initializeUsers()
+  }, []) // eslint-disable-line
+
+  useEffect(() => {
     props.initializeUser()
   }, []) // eslint-disable-line
 
   console.log(props)
+
+  if (!props.user) {
+    return (
+      <div>
+        <LoginForm />
+      </div>
+    )
+  }
+
   return (
     <div>
-      {props.user === null
-        ? <div>
-          <LoginForm />
-        </div>
-        :
+      <Notification />
+      <Router>
         <div>
-          <Notification />
-          <div>
-            <h2>blogs</h2>
-            <p>{props.user.name} logged in <br />
-              <button onClick={() => props.logout()}>logout</button>
-            </p>
-            <Togglable buttonLabel="new blog" ref={blogFormRef}>
-              <BlogForm />
-            </Togglable>
-            <BlogList />
-          </div>
+          <h2>blogs</h2>
+          <p>{props.user.name} logged in <br />
+            <button onClick={() => props.logout()}>logout</button>
+          </p>
+          <Route exact path='/' render={() =>
+            <div>
+              <Togglable buttonLabel="new blog" ref={blogFormRef}>
+                <BlogForm />
+              </Togglable>
+              <BlogList />
+            </div>
+          } />
+          <Route exact path='/users' render={() => <UserList />} />
         </div>
-      }
+      </Router>
     </div>
   )
 }
@@ -54,6 +70,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   initializeBlogs,
+  initializeUsers,
   initializeUser,
   logout,
 }

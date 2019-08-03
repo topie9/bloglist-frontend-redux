@@ -7,7 +7,7 @@
 7.4 Notification component using redux  
 7.5 BlogForm and BlogList components using redux  
 7.6 Using redux for logged in user's data handling. LoginForm component using redux.  
-7.7  
+7.7 Using router to enable /users view  
 7.8  
 7.9  
 7.10  
