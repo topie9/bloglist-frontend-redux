@@ -4,10 +4,10 @@ import { BrowserRouter as Router,
   Route, } from 'react-router-dom'
 import { Blog, BlogList, BlogForm,
   User, UserList, LoginForm, Notification,
-  Togglable  } from './components'
+  Togglable, NavBar  } from './components'
 import { initializeBlogs } from './reducers/blogReducer'
 import { initializeUsers } from './reducers/userReducer'
-import { initializeUser, logout } from './reducers/authReducer'
+import { initializeUser } from './reducers/authReducer'
 
 
 const App = (props) => {
@@ -39,11 +39,9 @@ const App = (props) => {
     <div>
       <Notification />
       <Router>
+        <NavBar />
         <div>
-          <h2>blogs</h2>
-          <p>{props.user.name} logged in <br />
-            <button onClick={() => props.logout()}>logout</button>
-          </p>
+          <h2>blog app</h2>
           <Route exact path='/' render={() =>
             <div>
               <Togglable buttonLabel="new blog" ref={blogFormRef}>
@@ -77,7 +75,6 @@ const mapDispatchToProps = {
   initializeBlogs,
   initializeUsers,
   initializeUser,
-  logout,
 }
 
 export default connect(
