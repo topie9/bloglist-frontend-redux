@@ -1,17 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { Menu, Button } from 'semantic-ui-react'
 import { logout } from '../reducers/authReducer'
 
 const NavBar = (props) => {
 
   return (
     <div>
-      <Link to='/'>blogs</Link>
-      <Link to='/users'>users</Link>
-
-      {props.user.name} logged in
-      <button onClick={() => props.logout()}>logout</button>
+      <Menu>
+        <Menu.Item link>
+          <Link to='/'>blogs</Link>
+        </Menu.Item>
+        <Menu.Item link>
+          <Link to='/users'>users</Link>
+        </Menu.Item>
+        <Menu.Item>
+          {props.user.name} logged in
+          <Button onClick={() => props.logout()}>logout</Button>
+        </Menu.Item>
+      </Menu>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router,
   Route, } from 'react-router-dom'
+import { Container } from 'semantic-ui-react'
 import { Blog, BlogList, BlogForm,
   User, UserList, LoginForm, Notification,
   Togglable, NavBar  } from './components'
@@ -25,41 +26,43 @@ const App = (props) => {
     props.initializeUser()
   }, []) // eslint-disable-line
 
-  console.log(props)
-
   if (!props.user) {
     return (
-      <div>
-        <LoginForm />
-      </div>
+      <Container>
+        <div>
+          <LoginForm />
+        </div>
+      </Container>
     )
   }
 
   return (
-    <div>
-      <Notification />
-      <Router>
-        <NavBar />
-        <div>
-          <h2>blog app</h2>
-          <Route exact path='/' render={() =>
-            <div>
-              <Togglable buttonLabel="new blog" ref={blogFormRef}>
-                <BlogForm />
-              </Togglable>
-              <BlogList />
-            </div>
-          } />
-          <Route exact path='/users' render={() => <UserList />} />
-          <Route exact path='/users/:id' render={({ match }) =>
-            <User user={props.users.find(u => u.id === match.params.id)} />
-          } />
-          <Route exact path='/blogs/:id' render={({ match }) =>
-            <Blog blog={props.blogs.find(b => b.id === match.params.id)} />
-          } />
-        </div>
-      </Router>
-    </div>
+    <Container>
+      <div>
+        <Notification />
+        <Router>
+          <NavBar />
+          <div>
+            <h2>blog app</h2>
+            <Route exact path='/' render={() =>
+              <div>
+                <Togglable buttonLabel="new blog" ref={blogFormRef}>
+                  <BlogForm />
+                </Togglable>
+                <BlogList />
+              </div>
+            } />
+            <Route exact path='/users' render={() => <UserList />} />
+            <Route exact path='/users/:id' render={({ match }) =>
+              <User user={props.users.find(u => u.id === match.params.id)} />
+            } />
+            <Route exact path='/blogs/:id' render={({ match }) =>
+              <Blog blog={props.blogs.find(b => b.id === match.params.id)} />
+            } />
+          </div>
+        </Router>
+      </div>
+    </Container>
   )
 }
 

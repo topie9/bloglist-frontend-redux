@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Form, Button } from 'semantic-ui-react'
 import { createBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 
@@ -26,23 +27,23 @@ const BlogForm = (props) => {
   return (
     <div>
       <h2>create new</h2>
-      <form onSubmit={addBlog}>
-        <div>
-          title:
+      <Form onSubmit={addBlog}>
+        <Form.Field>
+          <label>title:</label>
           <input name='title' />
-        </div>
-        <div>
-          author:
+        </Form.Field>
+        <Form.Field>
+          <label>author:</label>
           <input name='author' />
-        </div>
-        <div>
-          url:
+        </Form.Field>
+        <Form.Field>
+          <label>url:</label>
           <input name='url' />
-        </div>
+        </Form.Field>
         <div>
-          <button type="submit">create</button>
+          <Button type="submit">create</Button>
         </div>
-      </form>
+      </Form>
     </div>
   )
 }
