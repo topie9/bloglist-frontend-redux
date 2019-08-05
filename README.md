@@ -14,7 +14,7 @@
 7.11 Added comments -field to blog schema in backend and required function to controller.  
 7.12 Added functionality for adding comments to blogs from frontend.  
 7.13 App stylin using Semantic UI. Main page komponents basic styling.  
-7.14  
+7.14 More styling. Refactoring some components.  
 7.15 ESLint configured  
 7.16  
 7.17  
@@ -30,4 +30,4 @@ React-Redux
 Redux Thunk  
 React Router  
 Eslint  
-Semanti UI  
+Semantic UI  

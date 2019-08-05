@@ -39,9 +39,9 @@ const App = (props) => {
   return (
     <Container>
       <div>
-        <Notification />
         <Router>
           <NavBar />
+          <Notification />
           <div>
             <h2>blog app</h2>
             <Route exact path='/' render={() =>

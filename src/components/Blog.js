@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Form, Button, List, Segment, Divider } from 'semantic-ui-react'
 import { addLikeToBlog, addCommentToBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 
@@ -21,31 +22,39 @@ const Blog = (props) => {
     event.preventDefault()
     const comment = event.target.comment.value
     event.target.comment.value = ''
-
-    props.addCommentToBlog(blog.id, comment)
+    if (comment !== '') {
+      props.addCommentToBlog(blog.id, comment)
+    } else {
+      props.setNotification({
+        message: 'cannot add empty comment',
+        type: 'error'
+      }, 3)
+    }
   }
 
   return (
-    <div>
+    <Segment color='violet'>
       <h2>{blog.title} {blog.author}</h2>
       <a href={blog.url}>{blog.url}</a> <br />
-      {blog.likes} likes
-      <button onClick={() => addLike(blog)}>like</button> <br />
+      {blog.likes} likes &nbsp;
+      <Button onClick={() => addLike(blog)}>like</Button> <br />
       added by {blog.user.name}
-
+      <Divider></Divider>
       <div>
         <h2>comments</h2>
         <div>
-          <form onSubmit={addComment}>
-            <input name='comment' />
-            <button type="submit">add comment</button>
-          </form>
+          <Form onSubmit={addComment}>
+            <Form.Field>
+              <input name='comment' />
+            </Form.Field>
+            <Button primary type="submit">add comment</Button>
+          </Form>
         </div>
-        <ul>
-          {blog.comments.map(c => <li key={c}>{c}</li>)}
-        </ul>
+        <List bulleted>
+          {blog.comments.map(c => <List.Item key={c}>{c}</List.Item>)}
+        </List>
       </div>
-    </div>
+    </Segment>
   )
 }
 

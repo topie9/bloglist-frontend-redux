@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Segment, List, Icon } from 'semantic-ui-react'
 
 const User = (props) => {
   if (props.user === undefined) {
@@ -7,17 +8,20 @@ const User = (props) => {
   }
 
   return (
-    <div>
+    <Segment>
       <h2>{props.user.name}</h2>
       <h3>added blogs</h3>
-      <ul>
+      <List as='ol'>
         {props.user.blogs
           .map(b =>
-            <li key={b.id}>{b.title}</li>
+            <List.Item key={b.id}>
+              <Icon name='right triangle' />
+              {b.title}
+            </List.Item>
           )
         }
-      </ul>
-    </div>
+      </List>
+    </Segment>
   )
 }
 

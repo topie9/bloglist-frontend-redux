@@ -41,7 +41,7 @@ const BlogForm = (props) => {
           <input name='url' />
         </Form.Field>
         <div>
-          <Button type="submit">create</Button>
+          <Button primary type="submit">create</Button>
         </div>
       </Form>
     </div>

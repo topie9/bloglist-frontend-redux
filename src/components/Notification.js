@@ -5,22 +5,21 @@ import { Message } from 'semantic-ui-react'
 const Notification = (props) => {
   const { message, type } = props.notification
 
+  let color = 'black'
+  if (type === 'success') {
+    color = 'green'
+  } else if (type === 'error') {
+    color = 'red'
+  }
+
   if (message === '')
     return <div></div>
 
-  if (type === 'success') {
-    return (
-      <Message success>
-        {message}
-      </Message>
-    )
-  } else if (type === 'error') {
-    return (
-      <Message error>
-        {message}
-      </Message>
-    )
-  }
+  return (
+    <Message floating color={color}>
+      {message}
+    </Message>
+  )
 }
 
 const mapStateToProps = (state) => {
