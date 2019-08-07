@@ -16,11 +16,13 @@
     "semantic-ui-react": "^0.87.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start-react": "react-scripts start",
+    "build-react-original": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "eslint": "eslint ."
+    "eslint": "eslint .",
+    "build": "webpack --mode=development",
+    "start": "webpack-dev-server --mode=development"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,8 +41,20 @@
   },
   "proxy": "http://localhost:3003",
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^8.0.5",
-    "eslint-plugin-jest": "^22.12.0"
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "eslint-plugin-jest": "^22.12.0",
+    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-root-plugin": "^0.10.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
   }
 }
