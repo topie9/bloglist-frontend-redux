@@ -16,8 +16,8 @@
 7.13 App stylin using Semantic UI. Main page komponents basic styling.  
 7.14 More styling. Refactoring some components.  
 7.15 ESLint configured  
-7.16 Webpack -configured, uses html-webpack-plugin and html-webpack-root-plugin to automatically create index.html with div id='root'/div
-7.17  
+7.16 Webpack -configured, uses html-webpack-plugin and html-webpack-root-plugin to automatically create index.html with div id='root'/div  
+7.17 Initial E2E -testing with cypress  
 7.18  
 7.19  
 7.20  
@@ -31,3 +31,4 @@ Redux Thunk
 React Router  
 Eslint  
 Semantic UI  
+Cypress  
