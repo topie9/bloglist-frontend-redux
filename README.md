@@ -19,8 +19,8 @@
 7.16 Webpack -configured, uses html-webpack-plugin and html-webpack-root-plugin to automatically create index.html with div id='root'/div  
 7.17 Initial E2E -testing with cypress  
 7.18 Testing database is now reset before performing tests  
-7.19  
-7.20  
+7.19 Added more cypress tests  
+7.20 Course feedback given    
 
 ## Libraries/packages used:
 

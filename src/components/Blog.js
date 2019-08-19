@@ -37,7 +37,7 @@ const Blog = (props) => {
       <h2>{blog.title} {blog.author}</h2>
       <a href={blog.url}>{blog.url}</a> <br />
       {blog.likes} likes &nbsp;
-      <Button onClick={() => addLike(blog)}>like</Button> <br />
+      <Button id='like' onClick={() => addLike(blog)}>like</Button> <br />
       added by {blog.user.name}
       <Divider></Divider>
       <div>
@@ -45,7 +45,7 @@ const Blog = (props) => {
         <div>
           <Form onSubmit={addComment}>
             <Form.Field>
-              <input name='comment' />
+              <input id='comment' name='comment' />
             </Form.Field>
             <Button primary type="submit">add comment</Button>
           </Form>
