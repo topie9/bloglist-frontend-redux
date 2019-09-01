@@ -2,6 +2,9 @@
 
 # Bloglist-frontend using redux
 
+# Exercises 7.1-7.3 are in repo:  
+https://github.com/topie9/fullstackopen/tree/master/osa7a/routed-anecdotes
+
 ## Steps done
 
 7.4 Notification component using redux  
